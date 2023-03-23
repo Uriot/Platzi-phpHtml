@@ -29,17 +29,65 @@ Buscar y abrir html.json.
 Agregar dentro de los {}:
 
 "php":{
-	"prefix":["php"],
-	"body": [ "<?php $0 ?>" ],
-	"description": "php code tag"
-},
+		"prefix":["php"],
+		"body": [ "<?php $0?>" ],
+		"description": "php code tag"
+	},
+	
+	"if":{
+		"prefix": ["if"],
+		"body": [
+			"<?php if($1): ?>",
+			"\t$2",
+			"<?php endif; ?>"
+		],
+		"description": "if php tag"
+	},
+	
+	"else":{
+		"prefix": ["else"],
+		"body": [
+			"<?php else: ?>",
+			
+		],
+		"description": "if php tag"
+	},
 
-"if":{
-	"prefix": ["if"],
-	"body": [
-		"<?php if($1): ?>",
-		"\t$2",
-		"<?php endif; ?>"
-	],
-	"description": "if php tag"
-}
+	"comentario":{
+		"prefix": ["comentario"],
+		"body": [
+			"<!-- $1 -->",
+			
+		],
+		"description": "comentario html"
+	},
+
+	"for":{
+		"prefix": ["for"],
+		"body": [
+			"<?php for($$i = ${1}; $$i < ${2}; $$i++): ?>",
+			"\t${4}",
+			"<?php endfor; ?>"
+		],
+		"description": "for php tag"
+	},
+	
+	"foreach": {
+		"prefix": "foreach",
+		"body": [
+			"<?php foreach ($$array${1} as $$index => $$value): ?>",
+			"\t${4}",
+			"<?php endforeach; ?>"
+		],
+		"description": "foreach loop"
+	},
+
+	"while": {
+		"prefix": "while",
+		"body": [
+			"<?php while ($$i < ${1}): ?>",
+			"\t${4}",
+			"<?php endwhile; ?>"
+		],
+		"description": "while loop"
+	},
