@@ -28,7 +28,7 @@ Ir a File → Preferences → User Snippets.
 Buscar y abrir html.json.
 Agregar dentro de los {}:
 
-"php":{
+	"php":{
 		"prefix":["php"],
 		"body": [ "<?php $0?>" ],
 		"description": "php code tag"
