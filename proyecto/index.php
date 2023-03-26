@@ -1,25 +1,69 @@
+<?php
+
+require("mail.php");
+
+function validate($name, $email, $subject, $message, $form)
+{
+    return !empty($name) && !empty($email) && !empty($subject) && !empty($message);
+}
+
+if (isset($_POST['form'])) {
+    $status = '';
+
+    if (validate(...$_POST)) {
+        $name = $_POST['name'];
+        $email = $_POST['email'];
+        $subject = $_POST['subject'];
+        $message = $_POST['message'];
+
+        $body = "$name <$email> ha enviado un mensaje: <br><br> $message";
+
+        //mandar correo
+
+        sendMail($subject, $body, $email, $name, true);
+
+        $status = 'success';
+
+
+    } else {
+        $status = 'danger';
+    }
+} else {
+    // $status = '';
+    // var_dump('no se ha enviado el formulario') ;
+    // die();
+}
+
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Formulario de Contacto</title>
-
+    <title>Proyecto</title>
     <link rel="stylesheet" href="./style/style.css">
 </head>
+
 <body>
 
+    <?php if($status == 'success'): ?>
     <div class="alert success">
         <span>¡Mensaje enviado!</span>
     </div>
+    <?php endif; ?>
 
+    <?php if($status == 'danger'): ?>
     <div class="alert danger">
         <span>¡Error al enviar el mensaje!</span>
     </div>
+    <?php endif; ?>
 
-    <form action="#">
-        <h1>¡Contactano!</h1>
+    <form action="./" method="post">
+        <h1>¡Contactanos!</h1>
         <div class="input-group">
             <label for="name">Nombre</label>
             <input type="text" name="name" id="name" placeholder="Escribe tu nombre">
@@ -37,7 +81,7 @@
             <textarea name="message" id="message" cols="30" rows="10" placeholder="Escribe tu mensaje"></textarea>
         </div>
         <div class="button-container">
-            <button type="submit">Enviar</button>
+            <button name="form" type="submit">Enviar</button>
         </div>
         <div class="contact-info">
             <div class="info">
@@ -51,4 +95,5 @@
 
     <script src="https://kit.fontawesome.com/79f37189bb.js" crossorigin="anonymous"></script>
 </body>
+
 </html>
